@@ -1,6 +1,7 @@
 <h1>Create formulario</h1>
 
-<form action="formulario/" method="post">
+<form action="{% url 'formulario' %}"  method="POST">
+    {% csrf_token %}
 
     {{form}}
 

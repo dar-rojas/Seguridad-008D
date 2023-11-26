@@ -21,5 +21,5 @@ from reclamos import views
 urlpatterns = [
     path('', views.create_formulario, name="formulario"),
     path('admin/', admin.site.urls),
-    
+    path('formulario/', views.create_formulario, name="formulario"),
 ]
