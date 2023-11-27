@@ -12,6 +12,8 @@ def unauthenticaded_user(view_func):
             group = request.user.groups.all()[0].name
             if group == 'Cliente':
                 return redirect('formulario') #si esta autenticado lo redirige a los reclamos    
+            if group == 'Admin':
+                return redirect('reclamos')
         else:
             return view_func(request, *args, **kwargs)
     return wrapper_func
