@@ -50,6 +50,16 @@ def login_view(request):
             else:
                 messages.error(request, ("Usuario o contraseña inválida"))
                 return redirect('login')
+        else:
+            messages.error(request, ("Captcha necesario para continuar"))
+            return redirect('login')
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form':form}) 
+
+#LOGOUT
+@allowed_users(allowed_roles=['Cliente', 'Admin'])
+def logout_view(request):
+    logout(request)
+    messages.success(request, ("Sesión cerrada exitosamente"))
+    return redirect('login')
