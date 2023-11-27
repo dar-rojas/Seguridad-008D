@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Reclamos{% endblock %}
+
+{% block content %}
+<h2>Reclamos</h2>
+{% for reclamo in reclamos %}
+<div class="media mb-3" style="border: 1px solid #ddd; padding: 20px; border-radius: 10px;">
+    {% load static %}
+    <div class="media-left"><img src="{% static 'img/profile.jpg' %}" class="media-object mr-2" style="width:45px"></img></div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            {{ reclamo.asunto }}
+            <i>Publicado el {{ reclamo.fecha }}</i></small>
+        </h4>
+        <h5>{{ reclamo.user.name }} {{ reclamo.user.lastname }}</h5>
+        <p>{{ reclamo.cuerpo }}</p>
+        <a href="{% url 'eliminar_reclamo' reclamo.id %}"><button type="button" class="btn btn-success">Solucionado</button></a>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
