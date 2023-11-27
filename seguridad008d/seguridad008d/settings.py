@@ -13,9 +13,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # Load enviromental variables
 load_dotenv()
+print(os.getenv("DATABASE_URL"))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'axes.middleware.AxesMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -88,10 +91,7 @@ WSGI_APPLICATION = 'seguridad008d.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.parse(os.getenv("DATABASE_URL"))
 }
 
 
@@ -146,3 +146,46 @@ AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 0.03 # 2 minutos de cooldown
 
 ALLOWED_HOSTS = ['seguridad008d.onrender.com', 'seguridad008d.duckdns.org']
+
+# uri to report policy violations
+# uri to report policy violations
+CSP_REPORT_URI = '<add your reporting uri>'
+
+# default source as self
+CSP_DEFAULT_SRC = ("'self'", )
+
+# style from our domain and bootstrapcdn
+CSP_STYLE_SRC = ("'self'", 
+	"code.jsdelivr.net")
+
+# scripts from our domain and other domains
+CSP_SCRIPT_SRC = ("'self'", 
+	"ajax.cloudflare.com", 
+	"static.cloudflareinsights.com", 
+	"www.google-analytics.com", 
+	"ssl.google-analytics.com", 
+	"cdn.ampproject.org", 
+	"www.googletagservices.com", 
+	"pagead2.googlesyndication.com",
+    "cdn.jsdelivr.net",
+    "code.jquery.com",
+    "www.google.com",
+    )
+
+# images from our domain and other domains
+CSP_IMG_SRC = ("'self'", 
+	"yt3.ggpht.com",
+    )
+
+# loading manifest, workers, frames, etc
+CSP_FONT_SRC = ("'self'", )
+CSP_CONNECT_SRC = ("'self'", 
+	"www.google-analytics.com", )
+CSP_OBJECT_SRC = ("'self'", )
+CSP_BASE_URI = ("'self'", )
+CSP_FRAME_ANCESTORS = ("'self'", )
+CSP_FORM_ACTION = ("'self'", )
+CSP_INCLUDE_NONCE_IN = ('script-src', )
+CSP_MANIFEST_SRC = ("'self'", )
+CSP_WORKER_SRC = ("'self'", )
+CSP_MEDIA_SRC = ("'self'", )
