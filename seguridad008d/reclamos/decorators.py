@@ -1,11 +1,17 @@
 from django.shortcuts import redirect
+from django.contrib.auth import logout
 
 #funcion para usuario no autenticado
 def unauthenticaded_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
             #Agregar redireccion al anadir mas paginas
-            return redirect('formulario') #si esta autenticado lo redirige a los reclamos
+            if not request.user.groups.exists():
+                logout(request) # si no pertenece a ningun grupo se deslogea y redirige a login
+                return redirect('login')   
+            group = request.user.groups.all()[0].name
+            if group == 'Cliente':
+                return redirect('formulario') #si esta autenticado lo redirige a los reclamos    
         else:
             return view_func(request, *args, **kwargs)
     return wrapper_func

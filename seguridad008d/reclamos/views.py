@@ -8,6 +8,7 @@ from reclamos.decorators import allowed_users, unauthenticaded_user
 from axes.decorators import axes_dispatch
 from reclamos.forms import LoginForm
 
+@allowed_users(allowed_roles=['Cliente'])
 def create_formulario(request):
     if request.method == 'GET':
         return render(request, 'formulario.html', {'form': Create_Form})
