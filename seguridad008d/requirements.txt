@@ -1,5 +1,5 @@
 asgiref==3.7.2
-Django==3.7.10
+Django==3.2.23
 django-axes==6.1.1
 django-recaptcha==4.0.0
 gunicorn==21.2.0
