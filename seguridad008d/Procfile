@@ -1,0 +1,1 @@
+web: gunicorn seguridad008d.wsgi:application
