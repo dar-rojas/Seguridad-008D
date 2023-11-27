@@ -12,6 +12,7 @@ class LoginForm(forms.Form):
 
 
 class Create_Form(ModelForm):
+    captcha = ReCaptchaField()
     class Meta:
         model = Reclamo
-        fields = ['asunto', 'cuerpo']
+        fields = ('asunto', 'cuerpo', 'captcha')

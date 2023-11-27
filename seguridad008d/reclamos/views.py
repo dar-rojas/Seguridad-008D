@@ -15,15 +15,15 @@ def create_formulario(request):
     else:
         try:
             form = Create_Form(request.POST)
+            if not form.is_valid():
+                messages.error(request, ("Complete todos los campos correctamente para continuar"))
+                return redirect('formulario')
+            
             new_form = form.save(commit=False)
             
             # Establecer el valor de estado en 1
             new_form.estado = 1
-
-            # Asignar el usuario actual (si estás utilizando el sistema de autenticación de Django)
-            if request.user.is_authenticated:
-                new_form.usuario = request.user
-
+            new_form.usuario = request.user
             new_form.save()
 
             return redirect(reverse('formulario'))

@@ -1,9 +1,17 @@
 <h1>Create formulario</h1>
 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <form action="{% url 'formulario' %}"  method="POST">
     {% csrf_token %}
 
-    {{form}}
+    {{form.as_p}}
 
     <button>
         save
