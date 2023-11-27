@@ -1,20 +1,16 @@
-<h1>Create formulario</h1>
+{% extends 'base.html' %}
+{% block title %}Formulario de Reclamo{% endblock %}
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-
-<form action="{% url 'formulario' %}"  method="POST">
-    {% csrf_token %}
-
-    {{form.as_p}}
-
-    <button>
-        save
-    </button>
-
-</form>
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-4">
+        <h2 class="text-left mb-4">Formulario de Reclamo</h2>
+        {% include 'message_display.html' %}
+        <form action="{% url 'formulario' %}"  method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -13,6 +13,8 @@ class LoginForm(forms.Form):
 
 class Create_Form(ModelForm):
     captcha = ReCaptchaField()
+    asunto = forms.CharField(max_length = 150, widget=forms.TextInput(attrs={'class':'form-control'}))
+    cuerpo = forms.CharField(max_length = 1000, widget=forms.Textarea(attrs={'class':'form-control'}))
     class Meta:
         model = Reclamo
         fields = ('asunto', 'cuerpo', 'captcha')

@@ -26,6 +26,7 @@ def create_formulario(request):
             new_form.usuario = request.user
             new_form.save()
 
+            messages.success(request, ("Muchas gracias, su reclamo será revisado por nuestro personal"))
             return redirect(reverse('formulario'))
         except ValueError:
             return render(request, 'formulario.html', {

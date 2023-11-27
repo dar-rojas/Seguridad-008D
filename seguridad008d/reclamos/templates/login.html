@@ -4,6 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-4">
             <h2 class="text-center">Login</h2>
+            {% include 'message_display.html' %}
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
